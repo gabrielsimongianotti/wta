@@ -86,7 +86,7 @@ export default class CreateSheetSecondEdition1605497434681
             type: 'int',
           },
           {
-            name: 'Rank',
+            name: 'rank',
             type: 'varchar',
           },
           {

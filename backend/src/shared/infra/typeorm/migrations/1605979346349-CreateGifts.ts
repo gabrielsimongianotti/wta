@@ -30,11 +30,6 @@ export default class CreateGifts1605979346349 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'type',
-            type: 'varchar',
-          },
-
-          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
