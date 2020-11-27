@@ -28,10 +28,10 @@ class CreateUserService {
     description,
     system,
   }: IRequestDTO): Promise<IGifts> {
-    const checkSameEmail = await this.giftsRepositoty.findByName(name);
+    const checkSameName = await this.giftsRepositoty.findByName(name);
 
-    if (checkSameEmail) {
-      throw new AppError('Este fetiche ja esta cadastrado');
+    if (checkSameName) {
+      throw new AppError('Este don já esta cadastrado');
     }
 
     const gifts = await this.giftsRepositoty.create({
