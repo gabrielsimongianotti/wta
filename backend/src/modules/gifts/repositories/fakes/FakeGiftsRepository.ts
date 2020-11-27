@@ -6,12 +6,8 @@ import { uuid } from 'uuidv4';
 class FakeGiftsRepository implements IGiftsRepositoty {
   private gifts: Gifts[] = [];
 
-  public async findById(id: string): Promise<Gifts | undefined> {
-    throw new Error(`Method not implemented.${id}`);
-  }
-
   public async findAllGifts(): Promise<Gifts[]> {
-    throw new Error('Method not implemented.');
+    return this.gifts;
   }
 
   public async findByName(name: string): Promise<Gifts | undefined> {

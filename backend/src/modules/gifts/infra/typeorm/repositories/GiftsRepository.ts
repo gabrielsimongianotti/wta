@@ -38,12 +38,6 @@ class GiftsRepository implements IGiftsRepository {
     return gifts;
   }
 
-  public async findById(id: string): Promise<Gifts | undefined> {
-    const gifts = await this.ormRepository.findOne({ where: { id } });
-
-    return gifts;
-  }
-
   public async findAllGifts(): Promise<Gifts[]> {
     const gifts = await this.ormRepository.find();
 

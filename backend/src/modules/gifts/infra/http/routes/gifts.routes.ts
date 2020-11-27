@@ -1,12 +1,14 @@
 import { Router } from 'express';
 import { celebrate, Joi, Segments } from 'celebrate';
 
-import GiftsController from '@modules/gifts/infra/http/controller/GiftsController';
+import CreateGiftsController from '@modules/gifts/infra/http/controller/CreateGiftsController';
+import ListGiftsController from '@modules/gifts/infra/http/controller/ListGiftsController';
 
-const usersRouter = Router();
-const giftsController = new GiftsController();
+const giftRouter = Router();
+const createGiftsController = new CreateGiftsController();
+const listGiftsController = new ListGiftsController();
 
-usersRouter.post(
+giftRouter.post(
   '/',
   celebrate({
     [Segments.BODY]: {
@@ -16,7 +18,9 @@ usersRouter.post(
       name: Joi.string().required(),
     },
   }),
-  giftsController.create,
+  createGiftsController.index,
 );
 
-export default usersRouter;
+giftRouter.get('/', listGiftsController.index);
+
+export default giftRouter;

@@ -1,7 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
 import IGifts from '@modules/gifts/infra/typeorm/entities/Gifts';
-import AppError from '@shared/erros/AppError';
 import ICacheProvider from '@shared/container/provider/CacheProvider/models/ICacheProvider';
 import IGiftsRepositoty from '../repositories/IGiftsRepositoty';
 
@@ -22,27 +21,9 @@ class CreateUserService {
     private cacheProvider: ICacheProvider,
   ) {}
 
-  public async execute({
-    name,
-    level,
-    description,
-    system,
-  }: IRequestDTO): Promise<IGifts> {
-    const checkSameEmail = await this.giftsRepositoty.findByName(name);
+  public async execute(): Promise<IGifts[]> {
+    const gifts = await this.giftsRepositoty.findAllGifts();
 
-    if (checkSameEmail) {
-      throw new AppError('Este fetiche ja esta cadastrado');
-    }
-
-    const gifts = await this.giftsRepositoty.create({
-      name,
-      level,
-      description,
-      system,
-    });
-
-    await this.cacheProvider.invalidatePrefix('gifts-list:*');
-    await this.cacheProvider.invalidate(`provider-gifts:${gifts}`);
     return gifts;
   }
 }
