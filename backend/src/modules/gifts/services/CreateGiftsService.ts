@@ -3,7 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import IGifts from '@modules/gifts/infra/typeorm/entities/Gifts';
 import AppError from '@shared/erros/AppError';
 import ICacheProvider from '@shared/container/provider/CacheProvider/models/ICacheProvider';
-import IGiftsRepositoty from '../repositories/IGiftsRepositoty';
+import IGiftsRepository from '../repositories/IGiftsRepository';
 
 interface IRequestDTO {
   name: string;
@@ -13,10 +13,10 @@ interface IRequestDTO {
 }
 
 @injectable()
-class CreateUserService {
+class CreateGiftService {
   constructor(
-    @inject('GiftsRepositoty')
-    private giftsRepositoty: IGiftsRepositoty,
+    @inject('GiftsRepository')
+    private giftsRepositoty: IGiftsRepository,
 
     @inject('CacheProvider')
     private cacheProvider: ICacheProvider,
@@ -42,9 +42,8 @@ class CreateUserService {
     });
 
     await this.cacheProvider.invalidatePrefix('gifts-list:*');
-    await this.cacheProvider.invalidate(`provider-gifts:${gifts}`);
     return gifts;
   }
 }
 
-export default CreateUserService;
+export default CreateGiftService;

@@ -1,6 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 
-import IGiftsRepository from '@modules/gifts/repositories/IGiftsRepositoty';
+import IGiftsRepository from '@modules/gifts/repositories/IGiftsRepository';
 import ICreateGiftsDTO from '@modules/gifts/dtos/ICreateGiftsDTO';
 
 import Gifts from '@modules/gifts/infra/typeorm/entities/Gifts';

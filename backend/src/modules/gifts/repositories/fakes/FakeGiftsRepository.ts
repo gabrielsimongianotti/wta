@@ -1,9 +1,9 @@
-import IGiftsRepositoty from '@modules/gifts/repositories/IGiftsRepositoty';
+import IGiftsRepository from '@modules/gifts/repositories/IGiftsRepository';
 import ICreateGiftsDTO from '@modules/gifts/dtos/ICreateGiftsDTO';
 import Gifts from '@modules/gifts/infra/typeorm/entities/Gifts';
 import { uuid } from 'uuidv4';
 
-class FakeGiftsRepository implements IGiftsRepositoty {
+class FakeGiftsRepository implements IGiftsRepository {
   private gifts: Gifts[] = [];
 
   public async findAllGifts(): Promise<Gifts[]> {

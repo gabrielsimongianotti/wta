@@ -2,30 +2,29 @@ import { inject, injectable } from 'tsyringe';
 
 import IGifts from '@modules/gifts/infra/typeorm/entities/Gifts';
 import ICacheProvider from '@shared/container/provider/CacheProvider/models/ICacheProvider';
-import IGiftsRepositoty from '../repositories/IGiftsRepositoty';
-
-interface IRequestDTO {
-  name: string;
-  level: number;
-  description: string;
-  system: string;
-}
+import IGiftsRepository from '../repositories/IGiftsRepository';
 
 @injectable()
-class CreateUserService {
+class ListGiftsService {
   constructor(
-    @inject('GiftsRepositoty')
-    private giftsRepositoty: IGiftsRepositoty,
+    @inject('GiftsRepository')
+    private giftsRepository: IGiftsRepository,
 
     @inject('CacheProvider')
     private cacheProvider: ICacheProvider,
   ) {}
 
   public async execute(): Promise<IGifts[]> {
-    const gifts = await this.giftsRepositoty.findAllGifts();
+    let gifts = await this.cacheProvider.recover<IGifts[]>(`gifts-list:`);
+
+    if (!gifts) {
+      gifts = await this.giftsRepository.findAllGifts();
+
+      await this.cacheProvider.save(`gifts-list:`, gifts);
+    }
 
     return gifts;
   }
 }
 
-export default CreateUserService;
+export default ListGiftsService;
