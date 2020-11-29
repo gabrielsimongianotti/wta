@@ -8,7 +8,7 @@ let fakeGiftsRepository: FakeGiftsRepository;
 let fakeCacheProvider: FakeCacheProvider;
 let createGifts: CreateGiftsService;
 
-describe('CreateUser', () => {
+describe('CreateGift', () => {
   beforeEach(() => {
     fakeGiftsRepository = new FakeGiftsRepository();
     fakeCacheProvider = new FakeCacheProvider();
