@@ -6,8 +6,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('merit')
-class Appointment {
+@Entity('flaw')
+class Flaw {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -33,4 +33,4 @@ class Appointment {
   updated_at: Date;
 }
 
-export default Appointment;
+export default Flaw;
