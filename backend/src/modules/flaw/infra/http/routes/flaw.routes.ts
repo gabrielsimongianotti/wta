@@ -16,7 +16,9 @@ flawRouter.post(
       bonus: Joi.number().required(),
       system: Joi.string().required(),
       name: Joi.string().required(),
-      type: Joi.string().required(),
+      type: Joi.string()
+        .valid('supernatural', 'social', 'mental', 'physical')
+        .required(),
     },
   }),
 
