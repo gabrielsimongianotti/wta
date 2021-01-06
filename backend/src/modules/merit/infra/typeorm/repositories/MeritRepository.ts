@@ -1,6 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 
-import IMeritRepositoty from '@modules/merit/repositories/IMeritRepositoty';
+import IMeritRepositoty from '@modules/merit/repositories/IMeritRepository';
 import ICreateMeritDTO from '@modules/merit/dtos/ICreateMeritDTO';
 import Merit from '@modules/merit/infra/typeorm/entities/Merit';
 

@@ -2,13 +2,13 @@ import { inject, injectable } from 'tsyringe';
 
 import IMerit from '@modules/merit/infra/typeorm/entities/Merit';
 import ICacheProvider from '@shared/container/provider/CacheProvider/models/ICacheProvider';
-import IMeritRepositoty from '../repositories/IMeritRepositoty';
+import IMeritRepository from '../repositories/IMeritRepository';
 
 @injectable()
 class ListMeritsService {
   constructor(
-    @inject('MeritRepositoty')
-    private meritRepositoty: IMeritRepositoty,
+    @inject('MeritRepository')
+    private meritRepository: IMeritRepository,
 
     @inject('CacheProvider')
     private cacheProvider: ICacheProvider,
@@ -18,7 +18,7 @@ class ListMeritsService {
     let merits = await this.cacheProvider.recover<IMerit[]>(`merits-list:`);
 
     if (!merits) {
-      merits = await this.meritRepositoty.findAllMerits();
+      merits = await this.meritRepository.findAllMerits();
 
       await this.cacheProvider.save(`merits-list:`, merits);
     }
