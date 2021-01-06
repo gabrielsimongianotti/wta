@@ -2,13 +2,13 @@ import { inject, injectable } from 'tsyringe';
 
 import IFetiches from '@modules/fetiches/infra/typeorm/entities/Fetiches';
 import ICacheProvider from '@shared/container/provider/CacheProvider/models/ICacheProvider';
-import IFetichesRepositoty from '../repositories/IFetichesRepositoty';
+import IFetichesRepository from '../repositories/IFetichesRepository';
 
 @injectable()
 class ListFetichesService {
   constructor(
     @inject('FetichesRepository')
-    private fetichesRepositoty: IFetichesRepositoty,
+    private fetichesRepository: IFetichesRepository,
 
     @inject('CacheProvider')
     private cacheProvider: ICacheProvider,
@@ -20,7 +20,7 @@ class ListFetichesService {
     );
 
     if (!fetiches) {
-      fetiches = await this.fetichesRepositoty.findAllFetiches();
+      fetiches = await this.fetichesRepository.findAllFetiches();
 
       await this.cacheProvider.save(`fetiches-list:`, fetiches);
     }

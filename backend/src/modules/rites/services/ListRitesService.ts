@@ -2,13 +2,13 @@ import { inject, injectable } from 'tsyringe';
 
 import IRites from '@modules/rites/infra/typeorm/entities/Rites';
 import ICacheProvider from '@shared/container/provider/CacheProvider/models/ICacheProvider';
-import IRitesRepositoty from '../repositories/IRitesRepositoty';
+import IRitesRepository from '../repositories/IRitesRepository';
 
 @injectable()
 class ListRitesService {
   constructor(
-    @inject('RitesRepositoty')
-    private ritesRepositoty: IRitesRepositoty,
+    @inject('RitesRepository')
+    private ritesRepository: IRitesRepository,
 
     @inject('CacheProvider')
     private cacheProvider: ICacheProvider,
@@ -18,7 +18,7 @@ class ListRitesService {
     let rites = await this.cacheProvider.recover<IRites[]>(`rites-list:`);
 
     if (!rites) {
-      rites = await this.ritesRepositoty.findAllRites();
+      rites = await this.ritesRepository.findAllRites();
 
       await this.cacheProvider.save(`rites-list:`, rites);
     }

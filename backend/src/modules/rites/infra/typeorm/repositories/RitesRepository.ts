@@ -1,10 +1,10 @@
 import { getRepository, Repository } from 'typeorm';
 
-import IRitesRepositoty from '@modules/rites/repositories/IRitesRepositoty';
+import IRitesRepository from '@modules/rites/repositories/IRitesRepository';
 import ICreateRitesDTO from '@modules/rites/dtos/ICreateRitesDTO';
 import Rites from '@modules/rites/infra/typeorm/entities/Rites';
 
-class RitesRepository implements IRitesRepositoty {
+class RitesRepository implements IRitesRepository {
   private ormRepository: Repository<Rites>;
 
   constructor() {

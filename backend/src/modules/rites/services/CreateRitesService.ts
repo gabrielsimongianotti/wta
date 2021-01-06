@@ -3,7 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import IRites from '@modules/rites/infra/typeorm/entities/Rites';
 import AppError from '@shared/erros/AppError';
 import ICacheProvider from '@shared/container/provider/CacheProvider/models/ICacheProvider';
-import IRitesRepositoty from '../repositories/IRitesRepositoty';
+import IRitesRepositoty from '../repositories/IRitesRepository';
 
 interface IRequestDTO {
   name: string;
@@ -15,8 +15,8 @@ interface IRequestDTO {
 @injectable()
 class CreateRitesService {
   constructor(
-    @inject('RitesRepositoty')
-    private ritesRepositoty: IRitesRepositoty,
+    @inject('RitesRepository')
+    private ritesRepository: IRitesRepositoty,
 
     @inject('CacheProvider')
     private cacheProvider: ICacheProvider,
@@ -28,13 +28,13 @@ class CreateRitesService {
     description,
     system,
   }: IRequestDTO): Promise<IRites> {
-    const checkSameName = await this.ritesRepositoty.findByName(name);
+    const checkSameName = await this.ritesRepository.findByName(name);
 
     if (checkSameName) {
       throw new AppError('Este ritual já esta cadastrado');
     }
 
-    const rites = await this.ritesRepositoty.create({
+    const rites = await this.ritesRepository.create({
       name,
       level,
       description,

@@ -1,10 +1,10 @@
 import { uuid } from 'uuidv4';
 
-import IFetichesRepositoty from '@modules/fetiches/repositories/IFetichesRepositoty';
+import IFetichesRepository from '@modules/fetiches/repositories/IFetichesRepository';
 import ICreateFetichesDTO from '@modules/fetiches/dtos/ICreateFetichesDTO';
 import Fetiches from '@modules/fetiches/infra/typeorm/entities/Fetiches';
 
-class FakeFetichesRepository implements IFetichesRepositoty {
+class FakeFetichesRepository implements IFetichesRepository {
   private fetiches: Fetiches[] = [];
 
   public async create({

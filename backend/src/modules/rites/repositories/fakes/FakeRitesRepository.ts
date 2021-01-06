@@ -1,10 +1,10 @@
 import { uuid } from 'uuidv4';
 
-import IRitesRepositoty from '@modules/rites/repositories/IRitesRepositoty';
+import IRitesRepository from '@modules/rites/repositories/IRitesRepository';
 import ICreateRitesDTO from '@modules/rites/dtos/ICreateRitesDTO';
 import Rites from '@modules/rites/infra/typeorm/entities/Rites';
 
-class FakeRitesRepository implements IRitesRepositoty {
+class FakeRitesRepository implements IRitesRepository {
   private rites: Rites[] = [];
 
   public async create({
