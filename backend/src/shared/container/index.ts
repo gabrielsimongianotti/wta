@@ -4,9 +4,6 @@ import '@modules/users/providers';
 
 import './provider';
 
-import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
-import AppointmentsRepository from '@modules/appointments/infra/typeorm/repositories/AppointmentsRepository';
-
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
 
@@ -22,22 +19,20 @@ import GiftsRepository from '@modules/gifts/infra/typeorm/repositories/GiftsRepo
 import IFlawRepository from '@modules/flaw/repositories/IFlawRepository';
 import FlawRepository from '@modules/flaw/infra/typeorm/repositories/FlawRepository';
 
-import IMeritRepositoty from '@modules/merit/repositories/IMeritRepositoty';
-import MeritRepositoty from '@modules/merit/infra/typeorm/repositories/MeritRepositoty';
+import IMeritRepository from '@modules/merit/repositories/IMeritRepository';
+import MeritRepository from '@modules/merit/infra/typeorm/repositories/MeritRepository';
 
-import IFetichesRepositoty from '@modules/fetiches/repositories/IFetichesRepositoty';
+import IFetichesRepository from '@modules/fetiches/repositories/IFetichesRepository';
 import FetichesRepository from '@modules/fetiches/infra/typeorm/repositories/FetichesRepository';
 
-import IRitesRepositoty from '@modules/rites/repositories/IRitesRepositoty';
+import IRitesRepository from '@modules/rites/repositories/IRitesRepository';
 import RitesRepository from '@modules/rites/infra/typeorm/repositories/RitesRepository';
 
-import IBackgroundsRepositoty from '@modules/backgrounds/repositories/IBackgroundsRepositoty';
+import IBackgroundsRepository from '@modules/backgrounds/repositories/IBackgroundsRepository';
 import BackgroundsRepository from '@modules/backgrounds/infra/typeorm/repositories/BackgroundsRepository';
 
-container.registerSingleton<IAppointmentsRepository>(
-  'AppointmentsRepository',
-  AppointmentsRepository,
-);
+import IGroupRepository from '@modules/group/repositories/IGroupRepository';
+import GroupRepository from '@modules/group/infra/typeorm/repositories/GroupRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -61,27 +56,27 @@ container.registerSingleton<IGiftsRepository>(
 
 container.registerSingleton<IFlawRepository>('FlawRepository', FlawRepository);
 
-container.registerSingleton<IMeritRepositoty>(
-  'MeritRepositoty',
-  MeritRepositoty,
+container.registerSingleton<IMeritRepository>(
+  'MeritRepository',
+  MeritRepository,
 );
 
-container.registerSingleton<IFetichesRepositoty>(
+container.registerSingleton<IFetichesRepository>(
   'FetichesRepository',
   FetichesRepository,
 );
 
-container.registerSingleton<IRitesRepositoty>(
-  'RitesRepositoty',
+container.registerSingleton<IRitesRepository>(
+  'RitesRepository',
   RitesRepository,
 );
 
-container.registerSingleton<IRitesRepositoty>(
-  'RitesRepositoty',
-  RitesRepository,
-);
-
-container.registerSingleton<IBackgroundsRepositoty>(
+container.registerSingleton<IBackgroundsRepository>(
   'BackgroundsRepository',
   BackgroundsRepository,
+);
+
+container.registerSingleton<IGroupRepository>(
+  'GroupRepository',
+  GroupRepository,
 );
