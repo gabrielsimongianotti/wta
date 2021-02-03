@@ -44,7 +44,7 @@ class CreateFlawService {
       system,
     });
 
-    await this.cacheProvider.invalidatePrefix('flaw-list:*');
+    await this.cacheProvider.invalidatePrefix('flaws-list:');
     return flaws;
   }
 }

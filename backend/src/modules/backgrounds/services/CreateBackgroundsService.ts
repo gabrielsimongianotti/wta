@@ -38,7 +38,7 @@ class CreateBackgroundsService {
       description,
     });
 
-    await this.cacheProvider.invalidatePrefix('backgrounds-list:*');
+    await this.cacheProvider.invalidatePrefix('backgrounds-list');
     return background;
   }
 }

@@ -44,7 +44,7 @@ class CreateMeritService {
       type,
     });
 
-    await this.cacheProvider.invalidatePrefix('merits-list:*');
+    await this.cacheProvider.invalidatePrefix('merits-list');
 
     return merit;
   }

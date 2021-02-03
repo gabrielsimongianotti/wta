@@ -41,7 +41,7 @@ class CreateGiftService {
       system,
     });
 
-    await this.cacheProvider.invalidatePrefix('gifts-list:*');
+    await this.cacheProvider.invalidatePrefix('gifts-list');
     return gifts;
   }
 }

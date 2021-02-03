@@ -41,7 +41,7 @@ class CreateFeticheService {
       system,
     });
 
-    await this.cacheProvider.invalidatePrefix('fetiches-list:*');
+    await this.cacheProvider.invalidatePrefix('fetiches-list');
     return fetiches;
   }
 }

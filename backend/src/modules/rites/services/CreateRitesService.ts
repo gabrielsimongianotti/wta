@@ -41,7 +41,7 @@ class CreateRitesService {
       system,
     });
 
-    await this.cacheProvider.invalidatePrefix('rites-list:*');
+    await this.cacheProvider.invalidatePrefix('rites-list');
     return rites;
   }
 }
