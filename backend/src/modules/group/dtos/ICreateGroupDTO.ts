@@ -74,12 +74,12 @@ export default interface ICreateGroupDTO {
     | '23:00:00'
     | '23:30:00'
     | '00:00:00';
-  user_first_id: string;
-  user_secund_id: string;
-  user_third_id: string;
-  user_fourth_id: string;
-  user_fifth_id: string;
-  user_sixth_id: string;
-  user_seventh_id: string;
+  user_first_id: string | null;
+  user_secund_id: string | null;
+  user_third_id: string | null;
+  user_fourth_id: string | null;
+  user_fifth_id: string | null;
+  user_sixth_id: string | null;
+  user_seventh_id: string | null;
   user_master_id: string;
 }

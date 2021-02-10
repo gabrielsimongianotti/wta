@@ -14,20 +14,20 @@ class CreateGroupService {
 
     @inject('CacheProvider')
     private cacheProvider: ICacheProvider,
-  ) { }
+  ) {}
 
   public async execute({
     endHours,
     initialHours,
     name,
-    user_fifth_id,
+    user_fifth_id = null,
     user_master_id,
-    user_first_id,
-    user_fourth_id,
-    user_secund_id,
-    user_seventh_id,
-    user_sixth_id,
-    user_third_id,
+    user_first_id = null,
+    user_fourth_id = null,
+    user_secund_id = null,
+    user_seventh_id = null,
+    user_sixth_id = null,
+    user_third_id = null,
     weekday,
   }: ICreateGroup): Promise<Group> {
     const validateTime = await this.groupRepository.compareTime({
