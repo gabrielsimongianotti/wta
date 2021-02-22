@@ -780,6 +780,11 @@
   resolved "https://registry.yarnpkg.com/@types/strip-json-comments/-/strip-json-comments-0.0.30.tgz#9aa30c04db212a9a0649d6ae6fd50accc40748a1"
   integrity sha512-7NQmHra/JILCd1QqpSzl8+mJRc8ZHz3uDm8YV1Ks9IhK0epEiTw8aIErbvH9PI+6XbqhyIQy3462nEsn7UVzjQ==
 
+"@types/swagger-ui-dist@^3.30.0":
+  version "3.30.0"
+  resolved "https://registry.yarnpkg.com/@types/swagger-ui-dist/-/swagger-ui-dist-3.30.0.tgz#21030122b38a118f001aa324571c64f71c43f4cc"
+  integrity sha512-7Ywy36lxnO5jToJUU/U/87RAyy1YGA89PB+wFWRjmPt3d7b7t5OAhKlwTsmUgGgUZBJnzAcwpZeNplAJo9wP4w==
+
 "@types/yargs-parser@*":
   version "15.0.0"
   resolved "https://registry.yarnpkg.com/@types/yargs-parser/-/yargs-parser-15.0.0.tgz#cb3f9f741869e20cce330ffbeb9271590483882d"
@@ -5539,6 +5544,11 @@ supports-hyperlinks@^2.0.0:
   dependencies:
     has-flag "^4.0.0"
     supports-color "^7.0.0"
+
+swagger-ui-dist@^3.42.0:
+  version "3.42.0"
+  resolved "https://registry.yarnpkg.com/swagger-ui-dist/-/swagger-ui-dist-3.42.0.tgz#4ed395b21f35a7b007c6e70ca3d5aa911e777f68"
+  integrity sha512-hTNX6cX7KWtBZgk6ZQSOzsBJhqdCmD5NOIjb6dBPKSnYZidSkIXOcaPMR3+kwxLrj8bDC881bSDlNbLsHikacg==
 
 symbol-tree@^3.2.4:
   version "3.2.4"
