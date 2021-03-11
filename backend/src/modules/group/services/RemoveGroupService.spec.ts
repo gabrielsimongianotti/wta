@@ -39,7 +39,7 @@ describe('RemoveGroupService', () => {
       user_seventh_id: '',
       user_master_id: 'user id',
     });
-    console.log(id, deleteFile);
+
     await removeGroupService.execute(id);
 
     expect(deleteFile).toHaveBeenCalledWith(id);
