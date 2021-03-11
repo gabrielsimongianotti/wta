@@ -1,11 +1,11 @@
 import { inject, injectable } from 'tsyringe';
 import AppError from '@shared/erros/AppError';
-import ICreateGroupDTO from '../dtos/ICreateGroupDTO';
+import IUpdateGroupDTO from '../dtos/IUpdateGroupDTO';
 import IGroupRepository from '../repositories/IGroupRepository';
 
 import Group from '../infra/typeorm/entities/Group';
 
-interface IRequest extends ICreateGroupDTO {
+interface IRequest extends IUpdateGroupDTO {
   id: string;
 }
 
@@ -16,21 +16,13 @@ class ShowGroupService {
     private groupRepository: IGroupRepository,
   ) {}
 
-  public async execute({
-    endHours,
-    initialHours,
-    name,
-    user_fifth_id,
-    user_master_id,
-    user_first_id,
-    user_fourth_id,
-    user_secund_id,
-    user_seventh_id,
-    user_sixth_id,
-    user_third_id,
-    weekday,
-    id,
-  }: IRequest): Promise<Group> {
+  public async execute(data: IRequest): Promise<Group> {
+    const {
+      endHours,
+      initialHours,
+      user_master_id,
+      weekday,
+    }= data
     const validateTime = await this.groupRepository.compareTime({
       oneTime: initialHours,
       secondTime: endHours,
@@ -39,33 +31,20 @@ class ShowGroupService {
     if (validateTime) {
       throw new AppError('vc vai virar a noite jogando?');
     }
+    if(weekday){
+      const busyDay = await this.groupRepository.findAllInWeekGroup({
+        endHours,
+        id: user_master_id,
+        initialHours,
+        weekday,
+      });
 
-    const busyDay = await this.groupRepository.findAllInWeekGroup({
-      endHours,
-      id: user_master_id,
-      initialHours,
-      weekday,
-    });
+      if (busyDay.length) {
+        throw new AppError('Este horario ja te mesa nesse horario');
+      }
+    } 
 
-    if (busyDay.length) {
-      throw new AppError('Este horario ja te mesa nesse horario');
-    }
-
-    const groups = await this.groupRepository.updata({
-      endHours,
-      initialHours,
-      name,
-      user_fifth_id,
-      user_master_id,
-      user_first_id,
-      user_fourth_id,
-      user_secund_id,
-      user_seventh_id,
-      user_sixth_id,
-      user_third_id,
-      weekday,
-      id,
-    });
+    const groups = await this.groupRepository.updata(data);
 
     return groups;
   }
