@@ -14,22 +14,10 @@ class CreateGroupService {
 
     @inject('CacheProvider')
     private cacheProvider: ICacheProvider,
-  ) {}
+  ) { }
 
-  public async execute({
-    endHours,
-    initialHours,
-    name,
-    user_fifth_id = null,
-    user_master_id,
-    user_first_id = null,
-    user_fourth_id = null,
-    user_secund_id = null,
-    user_seventh_id = null,
-    user_sixth_id = null,
-    user_third_id = null,
-    weekday,
-  }: ICreateGroup): Promise<Group> {
+  public async execute(data: ICreateGroup): Promise<Group> {
+    const { initialHours, endHours, user_master_id, weekday, name } = data;
     const validateTime = await this.groupRepository.compareTime({
       oneTime: initialHours,
       secondTime: endHours,
@@ -40,33 +28,20 @@ class CreateGroupService {
     }
 
     const busyDay = await this.groupRepository.findAllInWeekGroup({
-      endHours,
+      endHours: endHours,
       id: user_master_id,
-      initialHours,
-      weekday,
+      initialHours: initialHours,
+      weekday: weekday,
     });
 
     if (busyDay.length) {
       throw new AppError('Este horario ja te mesa nesse horario');
     }
 
-    const group = await this.groupRepository.create({
-      endHours,
-      initialHours,
-      name,
-      user_first_id,
-      user_secund_id,
-      user_third_id,
-      user_fourth_id,
-      user_fifth_id,
-      user_sixth_id,
-      user_seventh_id,
-      user_master_id,
-      weekday,
-    });
+    const group = await this.groupRepository.create(data);
 
     this.cacheProvider.invalidate(
-      `provider-groups:${name}:${user_master_id}:${initialHours}:${endHours}:${weekday}`,
+      `provider-groups:${name}:${weekday}:${initialHours}:${endHours}:${weekday}`,
     );
 
     return group;
