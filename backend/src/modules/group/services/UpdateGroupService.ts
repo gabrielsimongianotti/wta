@@ -20,9 +20,10 @@ class ShowGroupService {
     const {
       endHours,
       initialHours,
-      user_master_id,
+      id,
       weekday,
-    }= data
+    }= data;
+    
     const validateTime = await this.groupRepository.compareTime({
       oneTime: initialHours,
       secondTime: endHours,
@@ -31,10 +32,11 @@ class ShowGroupService {
     if (validateTime) {
       throw new AppError('vc vai virar a noite jogando?');
     }
+
     if(weekday){
       const busyDay = await this.groupRepository.findAllInWeekGroup({
         endHours,
-        id: user_master_id,
+        id,
         initialHours,
         weekday,
       });
@@ -43,7 +45,7 @@ class ShowGroupService {
         throw new AppError('Este horario ja te mesa nesse horario');
       }
     } 
-
+   
     const groups = await this.groupRepository.updata(data);
 
     return groups;
