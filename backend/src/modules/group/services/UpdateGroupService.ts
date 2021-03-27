@@ -14,16 +14,16 @@ class ShowGroupService {
   constructor(
     @inject('GroupRepository')
     private groupRepository: IGroupRepository,
-  ) {}
+  ) { }
 
   public async execute(data: IRequest): Promise<Group> {
     const {
       endHours,
       initialHours,
-      id,
+      user_master_id,
       weekday,
-    }= data;
-    
+    } = data;
+
     const validateTime = await this.groupRepository.compareTime({
       oneTime: initialHours,
       secondTime: endHours,
@@ -33,19 +33,20 @@ class ShowGroupService {
       throw new AppError('vc vai virar a noite jogando?');
     }
 
-    if(weekday){
-      const busyDay = await this.groupRepository.findAllInWeekGroup({
-        endHours,
-        id,
-        initialHours,
-        weekday,
-      });
 
-      if (busyDay.length) {
-        throw new AppError('Este horario ja te mesa nesse horario');
-      }
-    } 
+    const busyDay = await this.groupRepository.findAllInWeekGroup({
+      endHours,
+      id: user_master_id,
+      initialHours,
+      weekday,
+    });
+
    
+    if (busyDay.length) {
+      throw new AppError('Este horario ja te mesa nesse horario');
+    }
+
+
     const groups = await this.groupRepository.updata(data);
 
     return groups;
