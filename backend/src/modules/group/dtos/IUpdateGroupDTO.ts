@@ -1,7 +1,7 @@
 export default interface IUpdateGroupDTO {
   id: string;
   name?:string;
-  weekday?: 
+  weekday: 
   | 'Segunda'
   | 'Terça'
   | 'Quarta'
