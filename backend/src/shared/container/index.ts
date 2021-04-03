@@ -34,6 +34,9 @@ import BackgroundsRepository from '@modules/backgrounds/infra/typeorm/repositori
 import IGroupRepository from '@modules/group/repositories/IGroupRepository';
 import GroupRepository from '@modules/group/infra/typeorm/repositories/GroupRepository';
 
+import ISheetSecondEditionRepository from '@modules/sheetSecondEdition/repositories/ISheetSecondEditionRepository';
+import SheetSecondEditionRepository from '@modules/sheetSecondEdition/infra/typeorm/repositories/SheetSecondEditionRepository';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -79,4 +82,9 @@ container.registerSingleton<IBackgroundsRepository>(
 container.registerSingleton<IGroupRepository>(
   'GroupRepository',
   GroupRepository,
+);
+
+container.registerSingleton<ISheetSecondEditionRepository>(
+  'SheetSecondEditionRepository',
+  SheetSecondEditionRepository,
 );
