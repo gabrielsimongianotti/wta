@@ -16,8 +16,8 @@ import Flaw from '@modules/flaw/infra/typeorm/entities/Flaw';
 import Fetiche from '@modules/fetiches/infra/typeorm/entities/Fetiches';
 import Background from '@modules/backgrounds/infra/typeorm/entities/Backgrounds';
 
-@Entity('gift')
-class Appointment {
+@Entity('sheetSecondEdition')
+class SheetSecondEdition {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -217,7 +217,7 @@ class Appointment {
   rite_id: string;
 
   @ManyToOne(() => Rite)
-  @JoinColumn({ name: 'rites_id' })
+  @JoinColumn({ name: 'rite_id' })
   rites: Rite;
 
   @Column()
@@ -228,10 +228,10 @@ class Appointment {
   merits: Merit;
 
   @Column()
-  fetiche_id: string;
+  fetiches_id: string;
 
   @ManyToOne(() => Fetiche)
-  @JoinColumn({ name: 'fetiche_id' })
+  @JoinColumn({ name: 'fetiches_id' })
   fetiches: Fetiche;
 
   @Column()
@@ -248,4 +248,4 @@ class Appointment {
   updated_at: Date;
 }
 
-export default Appointment;
+export default SheetSecondEdition;
