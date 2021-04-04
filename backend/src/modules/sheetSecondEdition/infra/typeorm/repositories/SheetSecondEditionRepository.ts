@@ -3,12 +3,14 @@ import { getRepository, Repository, Raw } from 'typeorm';
 import ISheetSecondEditionRepository from '@modules/sheetSecondEdition/repositories/ISheetSecondEditionRepository';
 import ICreateSecondEditionpDTO from '@modules/sheetSecondEdition/dtos/ICreateSecondEditionpDTO';
 import SheetSecondEdition from '@modules/sheetSecondEdition/infra/typeorm/entities/SheetSecondEdition';
-
+import Users from '@modules/users/infra/typeorm/entities/Users';
 class SheetSecondEditionRepository implements ISheetSecondEditionRepository {
   private ormRepository: Repository<SheetSecondEdition>;
+  private UsersRepository: Repository<Users>;
 
   constructor() {
     this.ormRepository = getRepository(SheetSecondEdition);
+    this.UsersRepository = getRepository(Users);
   }
 
   public async create({
@@ -150,12 +152,12 @@ class SheetSecondEditionRepository implements ISheetSecondEditionRepository {
     return sheetSecondEdition;
   }
 
-  public async findById(id: string, name: string): Promise<SheetSecondEdition | undefined> {
-    const group = await this.ormRepository.findOne({
-      where: { [name]: id },
+  public async findByIdUser({ id }: { id: string }): Promise<Users | undefined> {
+    const user = await this.UsersRepository.findOne({
+      where: { id },
     });
 
-    return group;
+    return user;
   }
 }
 
