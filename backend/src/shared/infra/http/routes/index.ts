@@ -11,6 +11,7 @@ import fetichesRouter from '@modules/fetiches/infra/http/routes/fetiches.routes'
 import ritesRouter from '@modules/rites/infra/http/routes/rites.routes';
 import backgroundsRouter from '@modules/backgrounds/infra/http/routes/backgrounds.routes';
 import groupRouter from '@modules/group/infra/http/routes/group.routes';
+import sheetSecondEditionRouter from '@modules/sheetSecondEdition/infra/http/routes/sheetSecondEdition.routes';
 
 const routes = Router();
 
@@ -25,5 +26,6 @@ routes.use('/fetiches', fetichesRouter);
 routes.use('/rites', ritesRouter);
 routes.use('/backgrounds', backgroundsRouter);
 routes.use('/group', groupRouter);
+routes.use('/sheetSecondEdition', sheetSecondEditionRouter);
 
 export default routes;
