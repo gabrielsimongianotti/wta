@@ -81,5 +81,5 @@ export default interface ICreateGroupDTO {
   user_fifth_id?: string | null;
   user_sixth_id?: string | null;
   user_seventh_id?: string | null;
-  user_master_id: string | null;
+  user_master_id: string;
 }
