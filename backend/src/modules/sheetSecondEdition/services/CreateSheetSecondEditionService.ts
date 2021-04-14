@@ -15,7 +15,7 @@ class CreatSheetSecondEditionService {
     const { user_id } = data;
     const idValid = await this.sheetSecondEditionRepository.findByIdUser({ id: user_id })
 
-    if (!idValid) throw new AppError('Usuario invalido'+!idValid+idValid);
+    if (!idValid) throw new AppError('Usuario invalido');
 
     const sheetSecondEdition = await this.sheetSecondEditionRepository.create(data);
 
