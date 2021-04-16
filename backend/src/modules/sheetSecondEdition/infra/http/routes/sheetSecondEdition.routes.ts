@@ -3,9 +3,11 @@ import { celebrate, Joi, Segments } from 'celebrate';
 
 import CreateSheetSecondEditionController from '@modules/sheetSecondEdition/infra/http/controller/CreateSheetSecondEditionController';
 import UpdateSheetSecondEditionController from '@modules/sheetSecondEdition/infra/http/controller/UpdateSheetSecondEditionController';
+import ShowSheetSecondEditionController from '@modules/sheetSecondEdition/infra/http/controller/ShowSheetSecondEditionController';
 
 const createSheetSecondEditionController = new CreateSheetSecondEditionController();
 const updateSheetSecondEditionController = new UpdateSheetSecondEditionController();
+const showSheetSecondEditionController = new ShowSheetSecondEditionController();
 
 const sheetSecondEditionRouter = Router();
 
@@ -158,4 +160,10 @@ sheetSecondEditionRouter.put(
   }),
   updateSheetSecondEditionController.index,
 );
+
+sheetSecondEditionRouter.get(
+  '/:id',
+  showSheetSecondEditionController.index,
+);
+
 export default sheetSecondEditionRouter;
