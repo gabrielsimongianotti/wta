@@ -5,7 +5,7 @@ import ISheetSecondEditionRepository from '../repositories/ISheetSecondEditionRe
 import IUpdataSecondEditionpDTO from '@modules/sheetSecondEdition/dtos/IUpdataSecondEditionpDTO';
 
 @injectable()
-class CreatSheetSecondEditionService {
+class UpdataSheetSecondEditionService {
   constructor(
     @inject('SheetSecondEditionRepository')
     private sheetSecondEditionRepository: ISheetSecondEditionRepository,
@@ -15,7 +15,7 @@ class CreatSheetSecondEditionService {
     const { user_id, id } = data;
 
     const idValidSheet = await this.sheetSecondEditionRepository.findByIdSheet({ id });
-   
+
     if (!idValidSheet) throw new AppError('Id invalido');
 
     const idUserValid = await this.sheetSecondEditionRepository.findByIdUser({ id: user_id });
@@ -28,4 +28,4 @@ class CreatSheetSecondEditionService {
   }
 }
 
-export default CreatSheetSecondEditionService;
+export default UpdataSheetSecondEditionService;
