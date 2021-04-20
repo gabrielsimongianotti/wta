@@ -8,4 +8,5 @@ export default interface ISheetSecondEditionRepository {
   update(data: IUpdateSecondEditionpDTO): Promise<SheetSecondEdition>;
   findByIdUser({ id }: { id: string }): Promise<Users | undefined>
   findByIdSheet({ id }: { id: string }): Promise<SheetSecondEdition | undefined>
+  delete({ id }: { id: string }): Promise<void>
 }
