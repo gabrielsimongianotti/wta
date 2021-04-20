@@ -4,10 +4,12 @@ import { celebrate, Joi, Segments } from 'celebrate';
 import CreateSheetSecondEditionController from '@modules/sheetSecondEdition/infra/http/controller/CreateSheetSecondEditionController';
 import UpdateSheetSecondEditionController from '@modules/sheetSecondEdition/infra/http/controller/UpdateSheetSecondEditionController';
 import ShowSheetSecondEditionController from '@modules/sheetSecondEdition/infra/http/controller/ShowSheetSecondEditionController';
+import DeleteSheetSecondEditionController from '@modules/sheetSecondEdition/infra/http/controller/DeleteSheetSecondEditionController';
 
 const createSheetSecondEditionController = new CreateSheetSecondEditionController();
 const updateSheetSecondEditionController = new UpdateSheetSecondEditionController();
 const showSheetSecondEditionController = new ShowSheetSecondEditionController();
+const deleteSheetSecondEditionController = new DeleteSheetSecondEditionController();
 
 const sheetSecondEditionRouter = Router();
 
@@ -164,6 +166,11 @@ sheetSecondEditionRouter.put(
 sheetSecondEditionRouter.get(
   '/:id',
   showSheetSecondEditionController.index,
+);
+
+sheetSecondEditionRouter.delete(
+  '/:id',
+  deleteSheetSecondEditionController.index,
 );
 
 export default sheetSecondEditionRouter;
