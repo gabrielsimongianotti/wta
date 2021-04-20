@@ -8,6 +8,7 @@ import User from '@modules/users/infra/typeorm/entities/Users';
 import ICreateUsersDTO from '@modules/users/dtos/ICreateUsersDTO';
 
 class FakeSheetSecondEditionRepository implements ISheetSecondEditionRepository {
+
   private sheetSecondEdition: SheetSecondEdition[] = [];
   private users: User[] = [];
 
@@ -54,6 +55,13 @@ class FakeSheetSecondEditionRepository implements ISheetSecondEditionRepository 
     const user = this.users.find(user => user.id === id)
  
     return user
+  }
+
+  public async  delete({ id }: { id: string; }): Promise<void> {
+    await this.sheetSecondEdition.splice(
+      this.sheetSecondEdition.findIndex(sheet => sheet.id === id),
+      1,
+    );
   }
 }
 
