@@ -5,6 +5,7 @@ import ICreateSecondEditionpDTO from '@modules/sheetSecondEdition/dtos/ICreateSe
 import IUpdataSecondEditionpDTO from '@modules/sheetSecondEdition/dtos/IUpdataSecondEditionpDTO';
 import SheetSecondEdition from '@modules/sheetSecondEdition/infra/typeorm/entities/SheetSecondEdition';
 import Users from '@modules/users/infra/typeorm/entities/Users';
+
 class SheetSecondEditionRepository implements ISheetSecondEditionRepository {
   private ormRepository: Repository<SheetSecondEdition>;
   private UsersRepository: Repository<Users>;
@@ -289,6 +290,10 @@ class SheetSecondEditionRepository implements ISheetSecondEditionRepository {
     });
 
     return edit;
+  }
+
+  public async delete({ id }: { id: string; }): Promise<void> {
+    await this.ormRepository.delete(id);
   }
 
   public async findByIdUser({ id }: { id: string }): Promise<Users | undefined> {
