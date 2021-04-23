@@ -5,7 +5,7 @@ import ISheetSecondEditionRepository from '../repositories/ISheetSecondEditionRe
 import ICreateSecondEditionpDTO from '@modules/sheetSecondEdition/dtos/ICreateSecondEditionpDTO';
 
 @injectable()
-class CreatSheetSecondEditionService {
+class ShowSheetSecondEditionService {
   constructor(
     @inject('SheetSecondEditionRepository')
     private sheetSecondEditionRepository: ISheetSecondEditionRepository,
@@ -21,4 +21,4 @@ class CreatSheetSecondEditionService {
   }
 }
 
-export default CreatSheetSecondEditionService;
+export default ShowSheetSecondEditionService;

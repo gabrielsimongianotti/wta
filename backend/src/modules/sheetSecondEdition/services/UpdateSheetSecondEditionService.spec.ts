@@ -8,7 +8,7 @@ let fakeSheetSecondEditionRepository: FakeSheetSecondEditionRepository;
 let updateSheetSecondEditionService: UpdateSheetSecondEditionService;
 let createSheetSecondEditionService: CreateSheetSecondEditionService;
 
-describe('sheetSecondEditionService', () => {
+describe('UpdataSheetSecondEditionService', () => {
   beforeEach(() => {
     fakeSheetSecondEditionRepository = new FakeSheetSecondEditionRepository();
 

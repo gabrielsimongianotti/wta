@@ -1,11 +1,9 @@
 import { inject, injectable } from 'tsyringe';
 import AppError from '@shared/erros/AppError';
-import ISheetSecondEdition from '@modules/sheetSecondEdition/infra/typeorm/entities/SheetSecondEdition';
 import ISheetSecondEditionRepository from '../repositories/ISheetSecondEditionRepository';
-import ICreateSecondEditionpDTO from '@modules/sheetSecondEdition/dtos/ICreateSecondEditionpDTO';
 
 @injectable()
-class CreatSheetSecondEditionService {
+class RemoveSheetSecondEditionService {
   constructor(
     @inject('SheetSecondEditionRepository')
     private sheetSecondEditionRepository: ISheetSecondEditionRepository,
@@ -21,4 +19,4 @@ class CreatSheetSecondEditionService {
   }
 }
 
-export default CreatSheetSecondEditionService;
+export default RemoveSheetSecondEditionService;
