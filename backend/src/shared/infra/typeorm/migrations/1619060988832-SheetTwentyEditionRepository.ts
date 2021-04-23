@@ -313,7 +313,7 @@ export class SheetTwentyEditionRepository1619060988832 implements MigrationInter
         ],
         foreignKeys: [
           {
-            name: 'sheetTwentyEditionUSers',
+            name: 'sheetTwentyEditionUsers',
             referencedTableName: 'users',
             referencedColumnNames: ['id'],
             columnNames: ['user_id'],
