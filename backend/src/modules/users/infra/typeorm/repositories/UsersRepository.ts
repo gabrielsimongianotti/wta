@@ -49,7 +49,7 @@ class UsersRepository implements IUsersRepository {
     password,
   }: ICreateUsersDTO): Promise<User> {
     const users = this.ormRepository.create({ name, email, password });
-    console.log(users);
+
     await this.ormRepository.save(users);
 
     return users;
