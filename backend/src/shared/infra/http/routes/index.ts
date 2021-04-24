@@ -12,6 +12,7 @@ import ritesRouter from '@modules/rites/infra/http/routes/rites.routes';
 import backgroundsRouter from '@modules/backgrounds/infra/http/routes/backgrounds.routes';
 import groupRouter from '@modules/group/infra/http/routes/group.routes';
 import sheetSecondEditionRouter from '@modules/sheetSecondEdition/infra/http/routes/sheetSecondEdition.routes';
+import sheetTwentyEditionRouter from '@modules/sheetTwentyEdition/infra/http/routes/sheetTwentyEdition.routes';
 
 const routes = Router();
 
@@ -27,5 +28,6 @@ routes.use('/rites', ritesRouter);
 routes.use('/backgrounds', backgroundsRouter);
 routes.use('/group', groupRouter);
 routes.use('/sheetSecondEdition', sheetSecondEditionRouter);
+routes.use('/sheetTwentyEdition', sheetTwentyEditionRouter);
 
 export default routes;
