@@ -37,6 +37,10 @@ import GroupRepository from '@modules/group/infra/typeorm/repositories/GroupRepo
 import ISheetSecondEditionRepository from '@modules/sheetSecondEdition/repositories/ISheetSecondEditionRepository';
 import SheetSecondEditionRepository from '@modules/sheetSecondEdition/infra/typeorm/repositories/SheetSecondEditionRepository';
 
+import ISheetTwentyEditionRepository from '@modules/sheetTwentyEdition/repositories/ISheetTwentyEditionRepository';
+import SheetTwentyEditionRepository from '@modules/sheetTwentyEdition/infra/typeorm/repositories/SheetTwentyEditionRepository';
+
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -87,4 +91,9 @@ container.registerSingleton<IGroupRepository>(
 container.registerSingleton<ISheetSecondEditionRepository>(
   'SheetSecondEditionRepository',
   SheetSecondEditionRepository,
+);
+
+container.registerSingleton<ISheetTwentyEditionRepository>(
+  'SheetTwentyEditionRepository',
+  SheetTwentyEditionRepository,
 );
