@@ -88,17 +88,39 @@ class GroupRepository implements IGroupRepository {
     endHours,
   }: IFindAllInWeekFromGroupDTO): Promise<Group[]> {
     const findWeekday = await this.ormRepository.find({
-      where: {
-        user_fifth_id: id,
+      where: [{
         user_master_id: id,
-        user_first_id: id,
-        user_secund_id: id,
-        user_fourth_id: id,
-        user_seventh_id: id,
-        user_third_id: id,
-        user_sixth_id: id,
+        weekday,
+      }, 
+      {
+        user_fifth_id: id,
         weekday,
       },
+      {
+        user_secund_id: id,
+        weekday,
+      }, 
+      {
+        user_third_id: id,
+        weekday,
+      }, 
+      {
+        user_fourth_id: id,
+        weekday,
+      }, 
+      {
+        user_fifth_id: id,
+        weekday,
+      }, 
+      {
+        user_sixth_id: id,
+        weekday,
+      }, 
+      {
+        user_seventh_id: id,
+        weekday,
+      }, 
+    ]
     });
 
     const findGroup = findWeekday.filter(
@@ -154,6 +176,7 @@ class GroupRepository implements IGroupRepository {
   }
 
   public async findById(id: string): Promise<Group | undefined> {
+
     const group = this.ormRepository.findOne({
       where: { id },
     });
