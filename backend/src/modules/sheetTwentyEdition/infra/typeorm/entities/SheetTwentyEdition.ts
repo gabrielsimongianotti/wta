@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 
 import User from '@modules/users/infra/typeorm/entities/Users';
+import Group from '@modules/group/infra/typeorm/entities/Group';
 import Gift from '@modules/gifts/infra/typeorm/entities/Gifts';
 import Rite from '@modules/rites/infra/typeorm/entities/Rites';
 import Merit from '@modules/merit/infra/typeorm/entities/Merit';
@@ -27,6 +28,13 @@ class SheetTwentyEdition {
   @ManyToOne(() => User)
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  @Column()
+  group_id: string;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'group_id' })
+  group: Group;
 
   @Column()
   name: string;
