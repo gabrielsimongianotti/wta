@@ -13,7 +13,7 @@ class CreatSheetTwentyEditionService {
 
   public async execute(data: ICreateTwentyEditionpDTO): Promise<ISheetTwentyEdition> {
     const { user_id } = data;
-    const idValid = await this.sheetTwentyEditionRepository.findByIdUser({ id: user_id })
+    const idValid = await this.sheetTwentyEditionRepository.findByIdUser(user_id)
 
     if (!idValid) throw new AppError('Usuario invalido');
 
