@@ -5,18 +5,23 @@ import ICreateTwentyEditionpDTO from '@modules/sheetTwentyEdition/dtos/ICreateTw
 import IUpdataTwentyEditionpDTO from '@modules/sheetTwentyEdition/dtos/IUpdataTwentyEditionpDTO';
 import SheetTwentyEdition from '@modules/sheetTwentyEdition/infra/typeorm/entities/SheetTwentyEdition';
 import Users from '@modules/users/infra/typeorm/entities/Users';
+import Group from '@modules/group/infra/typeorm/entities/Group';
 
 class SheetTwentyEditionRepository implements ISheetTwentyEditionRepository {
   private ormRepository: Repository<SheetTwentyEdition>;
   private UsersRepository: Repository<Users>;
+  private GroupRepository: Repository<Group>;
 
   constructor() {
     this.ormRepository = getRepository(SheetTwentyEdition);
     this.UsersRepository = getRepository(Users);
+    this.GroupRepository = getRepository(Group);
+
   }
 
   public async create({
-    user_id = "",
+    user_id,
+    group_id,
     name = "",
     tribe,
     breed = '',
@@ -87,6 +92,7 @@ class SheetTwentyEditionRepository implements ISheetTwentyEditionRepository {
 
     const sheetSecondEdition = await this.ormRepository.create({
       user_id,
+      group_id,
       name,
       player,
       augurio,
@@ -154,7 +160,7 @@ class SheetTwentyEditionRepository implements ISheetTwentyEditionRepository {
       fetiches_id,
       backgrounds_id
     });
-   
+
     await this.ormRepository.save(sheetSecondEdition);
 
     return sheetSecondEdition;
@@ -163,6 +169,7 @@ class SheetTwentyEditionRepository implements ISheetTwentyEditionRepository {
   public async update({
     id = "",
     user_id = "",
+    group_id,
     name = "",
     player = "",
     augurio = "",
@@ -233,6 +240,7 @@ class SheetTwentyEditionRepository implements ISheetTwentyEditionRepository {
     const edit = await this.ormRepository.save({
       id,
       user_id,
+      group_id,
       name,
       player,
       augurio,
@@ -308,7 +316,7 @@ class SheetTwentyEditionRepository implements ISheetTwentyEditionRepository {
     await this.ormRepository.delete(id);
   }
 
-  public async findByIdUser({ id }: { id: string }): Promise<Users | undefined> {
+  public async findByIdUser(id: string): Promise<Users | undefined> {
     const user = await this.UsersRepository.findOne({
       where: { id },
     });
@@ -316,11 +324,26 @@ class SheetTwentyEditionRepository implements ISheetTwentyEditionRepository {
     return user;
   }
 
-  public async findByIdSheet({ id }: { id: string; }): Promise<SheetTwentyEdition | undefined> {
+  public async findByIdGroup(id: string): Promise<Group | undefined> {
+    const group = await this.GroupRepository.findOne({
+      where: { id },
+    });
+
+    return group;
+  }
+
+  public async findByIdSheet(id: string): Promise<SheetTwentyEdition | undefined> {
     const Sheet = await this.ormRepository.findOne({
       where: { id },
     });
 
+    return Sheet;
+  }
+  public async findByIdGroupAndIdUser({ group_id, user_id }: { user_id: string; group_id: string }): Promise<SheetTwentyEdition | undefined> {
+    const Sheet = this.ormRepository.findOne({
+      where: { group_id, user_id },
+    });
+    
     return Sheet;
   }
 }
