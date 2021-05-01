@@ -20,13 +20,13 @@ sheetTwentyEditionRouter.post(
   celebrate({
     [Segments.BODY]: {
       user_id: Joi.string().uuid().required(),
+      group_id: Joi.string().uuid().required(),
       name: Joi.string(),
       player: Joi.string(),
       augurio: Joi.string(),
       garou_name: Joi.string(),
       rage: Joi.number(),
       spendingRage: Joi.number(),
-      
       gnosis: Joi.number(),
       spendingGnosis: Joi.number(),
       willpower: Joi.number(),
@@ -95,6 +95,7 @@ sheetTwentyEditionRouter.put(
     [Segments.BODY]: {
       id: Joi.string().uuid().required(),
       user_id: Joi.string().uuid().required(),
+      group_id: Joi.string().uuid().required(),
       name: Joi.string(),
       player: Joi.string(),
       augurio: Joi.string(),
@@ -164,7 +165,7 @@ sheetTwentyEditionRouter.put(
 );
 
 sheetTwentyEditionRouter.get(
-  '/:id',
+  '/:user_id/:group_id',
   showSheetTwentyEditionController.index,
 );
 
