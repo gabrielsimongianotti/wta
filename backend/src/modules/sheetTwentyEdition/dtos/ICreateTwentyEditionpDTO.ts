@@ -1,5 +1,6 @@
 export default interface ICreateTwentyEditionpDTO {
   user_id: string;
+  group_id: string;
   name?: string | null;
   player?: string | null;
   augurio?: string | null;
