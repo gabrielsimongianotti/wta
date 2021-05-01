@@ -24,20 +24,36 @@ describe('DeleteSheetTwentyEditionService', () => {
 
   it('should be able to delete the sheet', async () => {
     const deleteFile = jest.spyOn(removeSheetSecondEditionService, 'execute');
-    const { id = '' } = await fakeSheetTwentyEditionRepository.addUser({
+    const firstUser = await fakeSheetTwentyEditionRepository.addUser({
       name: 'John Doe',
       email: 'johndoe@example.com',
       password: '123456',
     });
 
-    const sheetTwentyEditionService = await createSheetTwentyEditionService.execute({
-      user_id: id,
-      name: "gatao"
+    const secundUser = await fakeSheetTwentyEditionRepository.addUser({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123456',
     });
 
-    await removeSheetSecondEditionService.execute(sheetTwentyEditionService.id)
+    const group = await fakeSheetTwentyEditionRepository.addGroup({
+      "endHours": "22:00:00",
+      "initialHours": "19:00:00",
+      "name": "mokole",
+      "user_first_id": secundUser.id,
+      "user_master_id": firstUser.id,
+      "weekday": "Sexta"
+    });
 
-     expect(deleteFile).toHaveBeenCalledWith(sheetTwentyEditionService.id);
+    const sheetTwentyEdition = await createSheetTwentyEditionService.execute({
+      user_id: secundUser.id,
+      name: "gatao",
+      group_id: group.id
+    });
+
+    await removeSheetSecondEditionService.execute(sheetTwentyEdition.id)
+
+    expect(deleteFile).toHaveBeenCalledWith(sheetTwentyEdition.id);
   });
 
   it('should not be able to delete sheet', async () => {
