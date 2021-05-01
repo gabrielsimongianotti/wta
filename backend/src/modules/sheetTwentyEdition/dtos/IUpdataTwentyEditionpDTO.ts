@@ -1,6 +1,7 @@
 export default interface IUpdataTwentyEditionpDTO {
   id: string;
   user_id: string;
+  group_id: string;
   name?: string | null;
   player?: string | null;
   augurio?: string | null;
