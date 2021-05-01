@@ -12,16 +12,16 @@ class UpdataSheetTwentyEditionService {
   ) { }
 
   public async execute(data: IUpdataTwentyEditionpDTO): Promise<ISheetTwentyEdition> {
-    const { user_id, id } = data;
-
-    const idValidSheet = await this.sheetTwentyEditionRepository.findByIdSheet({ id });
-
-    if (!idValidSheet) throw new AppError('Id invalido');
-
-    const idUserValid = await this.sheetTwentyEditionRepository.findByIdUser({ id: user_id });
+    const { user_id, group_id } = data;
+    
+    const idUserValid = await this.sheetTwentyEditionRepository.findByIdUser(user_id);
 
     if (!idUserValid) throw new AppError('Usuario invalido');
-  
+
+    const idValidSheet = await this.sheetTwentyEditionRepository.findByIdGroupAndIdUser({ user_id, group_id });
+
+    if (!idValidSheet) throw new AppError('Você não pode atualizar essa ficha');
+
     const sheetTwentyEdition = await this.sheetTwentyEditionRepository.update(data);
 
     return sheetTwentyEdition;

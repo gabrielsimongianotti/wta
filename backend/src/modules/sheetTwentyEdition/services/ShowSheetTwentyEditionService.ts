@@ -10,11 +10,12 @@ class ShowSheetTwentyEditionService {
     private sheetTwentyEditionRepository: ISheetTwentyEditionRepository,
   ) { }
 
-  public async execute(id: string): Promise<ISheetTwentyEdition> {
+  public async execute({ user_id, group_id }: { user_id: string, group_id: string; }): Promise<ISheetTwentyEdition> {
 
-    const sheetTwentyEdition = await this.sheetTwentyEditionRepository.findByIdSheet({ id })
 
-    if (!sheetTwentyEdition) throw new AppError('id invalido',sheetTwentyEdition);
+    const sheetTwentyEdition = await this.sheetTwentyEditionRepository.findByIdGroupAndIdUser({ user_id, group_id })
+
+    if (!sheetTwentyEdition) throw new AppError('ids invalido');
 
     return sheetTwentyEdition;
   }
