@@ -11,11 +11,11 @@ class RemoveSheetTwentyEditionService {
 
   public async execute(id: string): Promise<void> {
 
-    const sheetTwentyEdition = await this.sheetTwentyEditionRepository.findByIdSheet({ id })
-    
+    const sheetTwentyEdition = await this.sheetTwentyEditionRepository.findByIdSheet(id)
+
     if (!sheetTwentyEdition) throw new AppError('id invalido');
 
-    await this.sheetTwentyEditionRepository.delete({id});
+    await this.sheetTwentyEditionRepository.delete({ id });
   }
 }
 
