@@ -5,11 +5,11 @@ import ShowSheetTwentyEditionService from '@modules/sheetTwentyEdition/services/
 
 export default class ShowSheetTwentyEditionController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const { id } = request.params;
+    const { user_id, group_id } = request.params;
 
     const ShowSheetTwentyEdition = container.resolve(ShowSheetTwentyEditionService);
 
-    const sheetTwentyEdition = await ShowSheetTwentyEdition.execute(id);
+    const sheetTwentyEdition = await ShowSheetTwentyEdition.execute({ user_id, group_id });
 
     return response.json(sheetTwentyEdition);
   }
