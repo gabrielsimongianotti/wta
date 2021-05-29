@@ -1,10 +1,10 @@
 import { getRepository, Repository } from 'typeorm';
 
-import IFetichesRepositoty from '@modules/fetiches/repositories/IFetichesRepositoty';
+import IFetichesRepository from '@modules/fetiches/repositories/IFetichesRepository';
 import ICreateFetichesDTO from '@modules/fetiches/dtos/ICreateFetichesDTO';
 import Fetiches from '@modules/fetiches/infra/typeorm/entities/Fetiches';
 
-class FetichesRepository implements IFetichesRepositoty {
+class FetichesRepository implements IFetichesRepository {
   private ormRepository: Repository<Fetiches>;
 
   constructor() {
