@@ -17,5 +17,5 @@ export default interface IGroupRepository {
   }: {
     oneTime: string;
     secondTime: string;
-  }): Promise<true | false>;
+  }): boolean;
 }

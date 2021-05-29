@@ -40,13 +40,13 @@ class FakeGroupRepository implements IGroupRepository {
     );
   }
 
-  public async compareTime({
+  public compareTime({
     oneTime,
     secondTime,
   }: {
     oneTime: string;
     secondTime: string;
-  }): Promise<true | false> {
+  }): boolean {
     if (oneTime === secondTime) {
       return true;
     }
@@ -83,14 +83,13 @@ class FakeGroupRepository implements IGroupRepository {
           group.user_sixth_id === id) &&
         group.weekday === weekday,
     );
-
     const findGroup = findWeekday.filter(
       week =>
         this.compareTime({
           oneTime: week.initialHours,
           secondTime: initialHours,
         }) &&
-        this.compareTime({ oneTime: week.endHours, secondTime: endHours }),
+        this.compareTime({ oneTime: week.endHours, secondTime: endHours }) ? null : week
     );
 
     return findGroup;

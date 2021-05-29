@@ -13,6 +13,31 @@ class GroupRepository implements IGroupRepository {
     this.ormRepository = getRepository(Group);
   }
 
+  public compareTime({
+    oneTime,
+    secondTime,
+  }: {
+    oneTime: string;
+    secondTime: string;
+  }): boolean {
+    if (oneTime === secondTime) {
+      return true;
+    }
+
+    const time1 = oneTime.split(':');
+    const time2 = secondTime.split(':');
+
+    for (let i = 0; i < time1.length; i += 1) {
+      if (time1[i] > time2[i]) {
+        return true;
+      }
+      if (time1[i] < time2[i]) {
+        return false;
+      }
+    }
+    return false;
+  }
+
   public async validId(id: string): Promise<boolean> {
     const group = await this.ormRepository.find({
       where: {
@@ -56,30 +81,6 @@ class GroupRepository implements IGroupRepository {
     return findGroup;
   }
 
-  public async compareTime({
-    oneTime,
-    secondTime,
-  }: {
-    oneTime: string;
-    secondTime: string;
-  }): Promise<boolean> {
-    if (oneTime === secondTime) {
-      return true;
-    }
-
-    const time1 = oneTime.split(':');
-    const time2 = secondTime.split(':');
-
-    for (let i = 0; i < time1.length; i += 1) {
-      if (time1[i] > time2[i]) {
-        return true;
-      }
-      if (time1[i] < time2[i]) {
-        return false;
-      }
-    }
-    return false;
-  }
 
   public async findAllInWeekGroup({
     id,
@@ -91,7 +92,7 @@ class GroupRepository implements IGroupRepository {
       where: [{
         user_master_id: id,
         weekday,
-      }, 
+      },
       {
         user_fifth_id: id,
         weekday,
@@ -99,37 +100,40 @@ class GroupRepository implements IGroupRepository {
       {
         user_secund_id: id,
         weekday,
-      }, 
+      },
       {
         user_third_id: id,
         weekday,
-      }, 
+      },
       {
         user_fourth_id: id,
         weekday,
-      }, 
+      },
       {
         user_fifth_id: id,
         weekday,
-      }, 
+      },
       {
         user_sixth_id: id,
         weekday,
-      }, 
+      },
       {
         user_seventh_id: id,
         weekday,
-      }, 
-    ]
+      },
+      ]
     });
 
-    const findGroup = findWeekday.filter(
-      week =>
+    const findGroup = await findWeekday.filter(
+      (week) =>
         this.compareTime({
-          oneTime: week.initialHours,
-          secondTime: initialHours,
+          oneTime: endHours,
+          secondTime: week.initialHours
         }) &&
-        this.compareTime({ oneTime: week.endHours, secondTime: endHours }),
+        this.compareTime({
+          oneTime: week.endHours,
+          secondTime: initialHours
+        })
     );
 
     return findGroup;
@@ -150,10 +154,11 @@ class GroupRepository implements IGroupRepository {
     user_master_id,
   }: ICreateGroupDTO): Promise<Group> {
     const groups = this.ormRepository.create({
-      endHours,
-      initialHours,
-      name,
       weekday,
+      name,
+      initialHours,
+      endHours,
+      user_master_id,
       user_first_id,
       user_secund_id,
       user_third_id,
@@ -161,7 +166,6 @@ class GroupRepository implements IGroupRepository {
       user_fifth_id,
       user_sixth_id,
       user_seventh_id,
-      user_master_id,
     });
 
     await this.ormRepository.save(groups);
