@@ -85,11 +85,14 @@ class FakeGroupRepository implements IGroupRepository {
     );
     const findGroup = findWeekday.filter(
       week =>
-        this.compareTime({
-          oneTime: week.initialHours,
-          secondTime: initialHours,
-        }) &&
-        this.compareTime({ oneTime: week.endHours, secondTime: endHours }) ? null : week
+      this.compareTime({
+        oneTime: endHours,
+        secondTime: week.initialHours
+      }) &&
+      this.compareTime({
+        oneTime: week.endHours,
+        secondTime: initialHours
+      })
     );
 
     return findGroup;
