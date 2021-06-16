@@ -10,7 +10,14 @@ import api from '../services/api';
 
 interface AuthState {
   token: string;
-  user: object;
+  user: User;
+}
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  avatar?: string | null;
 }
 
 interface SignInCredentials {
@@ -19,27 +26,30 @@ interface SignInCredentials {
 }
 
 interface AuthContextData {
-  user: object;
+  user: User;
   signIn(credentials: SignInCredentials): Promise<void>;
+  updateUser(user: User): Promise<void>;
   signOut(): void;
   loading: boolean;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
-export const AuthProvider: React.FC = ({ children }) => {
+export const AuthProvider: React.FC = ({children}) => {
   const [data, setData] = useState<AuthState>({} as AuthState);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadStorageData(): Promise<void> {
       const [token, user] = await AsyncStorage.multiGet([
-        '@Matilha: token',
-        '@Matilha: user',
+        '@matilha: token',
+        '@matilha: user',
       ]);
 
       if (token[1] && user[1]) {
-        setData({ token: token[1], user: JSON.parse(user[1]) });
+        api.defaults.headers.authorization = `Bearer ${token[1]}`;
+
+        setData({token: token[1], user: JSON.parse(user[1])});
       }
 
       setLoading(false);
@@ -48,30 +58,42 @@ export const AuthProvider: React.FC = ({ children }) => {
     loadStorageData();
   }, []);
 
-  const signIn = useCallback(async ({ email, password }) => {
+  const signIn = useCallback(async ({email, password}) => {
     const response = await api.post('/sessions', {
       email,
       password,
     });
 
-    const { token, user } = response.data;
+    const {token, user} = response.data;
+
+    api.defaults.headers.authorization = `Bearer ${token}`;
 
     await AsyncStorage.multiSet([
-      ['@Matilha: token', token],
-      ['@Matilha: user', JSON.stringify(user)],
+      ['@matilha: token', token],
+      ['@matilha: user', JSON.stringify(user)],
     ]);
 
-    setData({ token, user });
+    setData({token, user});
   }, []);
 
+  const updateUser = useCallback(
+    async (user: User) => {
+      await AsyncStorage.setItem('@matilha: user', JSON.stringify(user));
+
+      setData({token: data.token, user});
+    },
+    [data.token, setData],
+  );
+
   const signOut = useCallback(async () => {
-    await AsyncStorage.multiRemove(['@Matilha: token', '@Matilha: user']);
+    await AsyncStorage.multiRemove(['@matilha: token', '@matilha: user']);
 
     setData({} as AuthState);
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: data.user, loading, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{user: data.user, loading, signIn, signOut, updateUser}}>
       {children}
     </AuthContext.Provider>
   );
