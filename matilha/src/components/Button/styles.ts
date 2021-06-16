@@ -15,7 +15,7 @@ export const Container = styled(RectButton)`
 
 export const ButtonText = styled.Text`
 
-  font-family: 'Trade Winds';
+  font-family: 'TradeWinds-Regular';
   color: #fff;
   font-size: 18px
 `;
