@@ -35,7 +35,7 @@ const SignUp: React.FC = () => {
 
       await schama.validate(data, { abortEarly: false })
 
-      api.post('/data',data);
+      await api.post('/users',data);
       goBack();
 
       Alert.alert("cadastrado com sucesso!","Você ja pode fazer login na aplicação")
