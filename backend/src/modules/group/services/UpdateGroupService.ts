@@ -22,6 +22,7 @@ class ShowGroupService {
       initialHours,
       user_master_id,
       weekday,
+      id
     } = data;
 
     const validateTime = await this.groupRepository.compareTime({
@@ -41,15 +42,13 @@ class ShowGroupService {
       weekday,
     });
 
-   
-    if (busyDay.length) {
+    if (busyDay.length > 1 && id !== busyDay[0].id) {
       throw new AppError('Este horario ja te mesa nesse horario');
     }
 
+    const group = await this.groupRepository.updata(data);
 
-    const groups = await this.groupRepository.updata(data);
-
-    return groups;
+    return group;
   }
 }
 
