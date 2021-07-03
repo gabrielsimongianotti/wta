@@ -12,6 +12,7 @@ const usersRouter = Router();
 const upload = multer(uploadConfig);
 const usersController = new UsersController();
 const userAvatarController = new UserAvatarController();
+
 usersRouter.post(
   '/',
   celebrate({
@@ -22,6 +23,16 @@ usersRouter.post(
     },
   }),
   usersController.create,
+);
+
+usersRouter.get(
+  '/:name',
+  celebrate({
+    [Segments.PARAMS]: {
+      name: Joi.string().required(),
+    },
+  }),
+  usersController.search,
 );
 
 usersRouter.patch(
